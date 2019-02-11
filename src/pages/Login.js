@@ -15,7 +15,7 @@ export default class Login extends Component {
 
     if(!username.length) return;
 
-    localStorage.setItem('gotwitter:username', username);
+    localStorage.setItem('@gotwitter:username', username);
 
     this.props.history.push('/timeline');
   }

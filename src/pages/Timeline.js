@@ -4,9 +4,18 @@ import twitterLogo from '../twitter.svg';
 import './Timeline.css';
 import api from '../services/api';
 
+import Tweet from '../components/Tweet';
+
 export default class Timeline extends Component {
   state={
-    newTweet: ''
+    newTweet: '',
+    tweets: []
+  }
+
+  async componentDidMount(){
+    const response = await api.get('tweets');
+
+    this.setState({tweets: response.data})
   }
 
   handleNewTweet = async e => {
@@ -40,9 +49,10 @@ export default class Timeline extends Component {
 
           </textarea>
         </form>
-
-        <ul>
-
+        <ul className="tweet-list">
+          { this.state.tweets.map(tweet => 
+            <Tweet key={tweet._id} tweet={tweet} />
+          )}
         </ul>
       </div>
     )
