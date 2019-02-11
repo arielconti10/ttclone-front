@@ -2,24 +2,32 @@ import React, { Component } from 'react'
 
 import twitterLogo from '../twitter.svg';
 import './Timeline.css';
+import api from '../services/api';
 
 export default class Timeline extends Component {
   state={
     newTweet: ''
   }
 
-  handleInputChange = e => {
+  handleNewTweet = async e => {
+    if (e.keyCode !== 13) return;
 
+    const content = this.state.newTweet;
+    const author = localStorage.getItem('@gotwitter:username');
+    
+    await api.post('tweets', { content, author });
+
+    this.setState({ newTweet: '' });
   }
 
-  handleNewTweet = e => {
-
+  handleInputChange = e => {
+    this.setState({ newTweet: e.target.value })
   }
   
 
   render() {
     return (
-      <div class="timeline-wrapper">
+      <div className="timeline-wrapper">
         <img src={twitterLogo} height="24" alt="GoTwitter"/>
 
         <form>
@@ -34,7 +42,7 @@ export default class Timeline extends Component {
         </form>
 
         <ul>
-          
+
         </ul>
       </div>
     )
