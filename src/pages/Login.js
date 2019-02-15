@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-// import './Login.css';
 import twitterLogo from '../twitter.svg';
 
 import { Wrapper } from '../styles'; 
+
 export default class Login extends Component {
   state = {
     username: ''

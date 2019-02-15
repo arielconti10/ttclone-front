@@ -3,7 +3,7 @@ import api from '../services/api';
 import socket from 'socket.io-client'; 
 
 import twitterLogo from '../twitter.svg';
-import './Timeline.css';
+import { TimelineWrapper, TweetList } from '../styles';
 
 import Tweet from '../components/Tweet';
 
@@ -55,7 +55,7 @@ export default class Timeline extends Component {
 
   render() {
     return (
-      <div className="timeline-wrapper">
+      <TimelineWrapper>
         <img src={twitterLogo} height="24" alt="GoTwitter"/>
 
         <form>
@@ -68,12 +68,12 @@ export default class Timeline extends Component {
 
           </textarea>
         </form>
-        <ul className="tweet-list">
+        <TweetList>
           { this.state.tweets.map(tweet => 
             <Tweet key={tweet._id} tweet={tweet} />
           )}
-        </ul>
-      </div>
+        </TweetList>
+      </TimelineWrapper>
     )
   }
 }
